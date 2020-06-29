@@ -1,0 +1,8 @@
+stages:
+    - deploy
+deploy:
+  stage: deploy
+  image: dtzar/helm-kubectl
+  script:
+    - echo ${kube_config} | base64 -d > config.yaml
+    - kubectl --kubeconfig="config.yaml" apply -f elastic.yaml
